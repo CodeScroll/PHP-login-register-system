@@ -12,7 +12,7 @@ if(!defined("MenuSctipt")){ header('Location: index.php'); }
 
     $fb = new Facebook\Facebook([
       'app_id' => '120604775447049', // Replace {app-id} with your app id
-      'app_secret' => 'c6047a07df8eb00cc840e3ba4b9998b0',
+      'app_secret' => 'xxxx',
       'default_graph_version' => 'v2.2',
       ]);
 
