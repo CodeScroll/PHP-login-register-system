@@ -42,7 +42,7 @@ class ReCaptcha
     private static $_signupUrl = "https://www.google.com/recaptcha/admin";
     private static $_siteVerifyUrl =
         "https://www.google.com/recaptcha/api/siteverify?";
-    private $_secret='6LdO9FMUAAAAAJNz5L7igSBv2ukro2hSgg8WZX3S';
+    private $_secret='xxxxx';
     private static $_version = "php_1.0";
     /**
      * Constructor.
