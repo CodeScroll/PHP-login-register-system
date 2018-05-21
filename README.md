@@ -11,11 +11,14 @@ Some "RULES"
  
  -The most important functions for user authentication are
  
-   - loginRegisterAuth(), every page that wants the  status of user, "disconnected"
+   - loginRegisterAuth(), every page that wants the status of user, "disconnected". Otherwise, 
+     redirects the user at home or restricted-home page( It depends of the verify variable ). 
    
-   - resHomeAuth(), every page that wants the  status of user, "connected" and unverified
+   - resHomeAuth(), every page that wants the status of user, "connected" and "unverified". Otherwise,
+     redirects the user at "index.php"( as disconnected ) or at "home.php" ( as connected and verified )
    
-   - homeAuth(), every page that wants the  status of user, "connected" and verified
+   - homeAuth(), every page that wants the  status of user, "connected" and verified. Otherwise,
+     redirects the user at "index.php"( as disconnected ) or at "restricted-home.php" ( as connected and unverified )
    
    -isLoggedIn(), if the user is "connected" or "disconnected"
    
