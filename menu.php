@@ -28,7 +28,7 @@ if(!defined("MenuSctipt")){ header('Location: index.php'); }
 
   <form action="" method="post" role="form">
    <input type="hidden" name="<?= $token_id; ?>" value="<?= $token_value; ?>" >
-    <input type="text" name="<?= $form_names['loginform']['linfemail']; ?>" tabindex="1" class="form-control" placeholder="Email" autocomplete="off" value="" required>
+    <input type="text" name="<?= $form_names['loginform']['linfemail']; ?>" tabindex="1" placeholder="Email" autocomplete="off" value="" required>
     <input type="password" name="<?= $form_names['loginform']['linfpassword']; ?>" tabindex="2" placeholder="Κωδικός" autocomplete="off" value="" required>
     <input type="submit" name="<?= $form_names['loginform']['linfsubmit']; ?>" tabindex="4" value="Είσοδος" >
     <a href="reset-password.php" tabindex="5">Ξέχασα τον κωδικό μου</a>
