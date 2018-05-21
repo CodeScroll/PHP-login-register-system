@@ -23,6 +23,8 @@ Some "RULES"
    - isLoggedIn(), if the user is "connected" or "disconnected"
    
 To run the project, you must set the email functionality of your server. 
-If you want to run it locally without email  you must comment the line 153 at "login.php" and uncomment the 154.
+If you want to run it locally without email  you must 
+ - comment the line 153 at "login.php" and uncomment the 154.
+ - comment the line 49 at "reset-password.php" 
 
 Stay here, the project grows up day by day :)
