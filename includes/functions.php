@@ -293,3 +293,28 @@ try{
  throw $rr;
 }  
 }
+
+function emailAccountBlock($theemail,$name,$surname,$blockcode){
+try{
+ 
+ $from_name = 'H Agora';
+ //-------------
+ $to      = $theemail;
+ $reply = 'iordanhsdec92@gmail.com';
+ $subject = 'Μπλοκάρισμα λογαριασμού!';
+ $message = '<div style="width:100%;text-align:center;display:block;">
+              <h4>Ο λογαριασμός σας κλειδώθηκε!</h4>
+              <p>Γειά σας κ. '.$name.' '.$surname.', φαίνετε πως έχετε εισαγάγει πέντε φορές λανθασμένα τον κωδικό σας και ο λογαριασμός σας έχει κλειδωθεί για μία ώρα( από της <b>'.date("h:i:sa").'</b> ). Εάν όντως δεν θυμάστε τον κωδικό μπορείτε να τον αλλάξετε. Διαφορετικά εάν δεν ήσασταν εσείς, πρέπει να το δηλώσετε!</h4><div style="width:100%;padding: 20px 0px;"><a href="'.$GLOBALS['linkforchangepassword'].'">Αλλαγή κωδικού</a></div><div style="width:100%;padding: 20px 0px;"><a href="'.$GLOBALS['linkforitwasntme'].'?email='.$theemail.'&blockcode='.$blockcode.'">Δεν ήμουν εγώ</a></div></div>';
+
+ $headers = "MIME-Version: 1.0\r\n";
+ $headers.= "From: =?utf-8?b?".base64_encode($from_name)."?= \r\n";
+ $headers.= "Content-Type: text/html;charset=utf-8\r\n";
+ $headers.= "Reply-To: $reply\r\n";  
+ $headers.= "X-Mailer: PHP/" . phpversion();
+
+ if(mail($to, '=?utf-8?B?'.base64_encode($subject).'?=', $message, $headers)){ return true; }else{ return false; }
+
+}catch(Exception $rr){
+ throw $rr;
+}
+}

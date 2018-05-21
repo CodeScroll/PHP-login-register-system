@@ -31,21 +31,24 @@ if(isset($_POST[$form_names['loginform']['linfemail']],
   $email = filterxss($_POST[$form_names['loginform']['linfemail']]);
   $password = filterxss($_POST[$form_names['loginform']['linfpassword']]);
   $attemptstable = false;
+  $blockcode = '';
 
     if(!filter_var($email, FILTER_VALIDATE_EMAIL) === false){
 
       $stmt = selectFromWhere($db, "*", "users", "email", $email);
       $stored = $stmt->fetch();
-      $hhhh = selectFromWhere($db, "attempts,created", "login_attempts", "email", $email);
+      $hhhh = selectFromWhere($db, "attempts,created,code", "login_attempts", "email", $email);
       $attemptsnumber = $hhhh->fetch();
       //if it's been one hour
       if($attemptsnumber){
         $attemptstable = true;
         $hourone = strtotime($attemptsnumber['created']);
+        $blockcode = $attemptsnumber['code'];
         if(time()-$hourone > 60*60){
           deleteFromWhere($db,'login_attempts','email',$email);
           $attemptsnumber['attempts'] = 0;
           $attemptstable = false;
+          $blockcode = '';
         }
       }
 
@@ -73,9 +76,10 @@ if(isset($_POST[$form_names['loginform']['linfemail']],
 
           if($attemptsCounter == 0){
             $attemptsCounter+=1;
-            $thecols = "(email,attempts,ipaddress)";
-            $parndata = array(':one'=>$email,':two'=>$attemptsCounter,':three'=>$ip);
-            $binds = "(:one,:two,:three)";
+            $blockcode = md5(uniqid(rand(), true));
+            $thecols = "(email,attempts,ipaddress,code)";
+            $parndata = array(':one'=>$email,':two'=>$attemptsCounter,':three'=>$ip,':four'=>$blockcode);
+            $binds = "(:one,:two,:three,:four)";
             insertInto($db,'login_attempts',$thecols,$binds,$parndata);
             $_SESSION['anerror'] = $lang['wrongcredentials'];
           }elseif($attemptsCounter > 0){
@@ -85,6 +89,10 @@ if(isset($_POST[$form_names['loginform']['linfemail']],
             $wheres = 'email=:mail';
             updateDb($db,'login_attempts',$theCols,$wheres,$bindss);
             $_SESSION['anerror'] = $lang['wrongcredentials'];
+
+            if($attemptsCounter == 5){
+             emailAccountBlock($stored['email'],$stored['username'],$stored['surname'],$blockcode);
+            }
           }
         }
       }
@@ -143,9 +151,7 @@ if(validate_email($email)){
   }else{
 
     if(registerEmail($email,$username,$surname,$user_key,$register_code)){
-    //$m = new EMailSender;
     //if( true ){
-    //if( $m->sendMail($email, $username." ".$surname, $user_key, $register_code) ){
 
      $db->beginTransaction();
 

@@ -12,3 +12,5 @@ $GLOBALS['dbpassword'] = '';
 $domain = 'http://localhost/LoginRegisterSystem2018/';
 $GLOBALS['linkforverify'] = $domain.'verify-account.php';
 $GLOBALS['linkforpassword'] = $domain.'reset-password-reset.php';
+$GLOBALS['linkforchangepassword'] = $domain.'reset-password.php';
+$GLOBALS['linkforitwasntme'] = $domain.'it-was-not-me.php';

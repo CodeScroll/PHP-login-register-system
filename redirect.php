@@ -3,7 +3,7 @@
 if(isset($_GET["goto"])){
 
 $theget = str_replace('"',"",$_GET["goto"]);
-$urls = array("account","cart","error","home","index","offers","orders-history","orders","store","resetpassword","restrictedhome");
+$urls = array("error","home","index","reset-password","restricted-home");
 
 	if (in_array($theget, $urls)){
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Φιλοξενητής: 127.0.0.1
--- Χρόνος δημιουργίας: 19 Μάη 2018 στις 15:16:19
+-- Χρόνος δημιουργίας: 21 Μάη 2018 στις 10:31:54
 -- Έκδοση διακομιστή: 10.1.26-MariaDB
 -- Έκδοση PHP: 7.1.9
 
@@ -21,6 +21,20 @@ SET time_zone = "+00:00";
 --
 -- Βάση δεδομένων: `loginregister`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `admin`
+--
+
+CREATE TABLE `admin` (
+  `pwd` char(64) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `verify` tinyint(1) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `user_key` char(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -72,7 +86,8 @@ CREATE TABLE `login_attempts` (
   `email` varchar(100) NOT NULL,
   `attempts` tinyint(1) NOT NULL,
   `ipaddress` char(80) NOT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `code` char(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -119,6 +134,13 @@ CREATE TABLE `verifying` (
 --
 -- Ευρετήρια για άχρηστους πίνακες
 --
+
+--
+-- Ευρετήρια για πίνακα `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`userid`),
+  ADD UNIQUE KEY `user_key` (`user_key`);
 
 --
 -- Ευρετήρια για πίνακα `autologin`
@@ -171,6 +193,12 @@ ALTER TABLE `verifying`
 --
 -- AUTO_INCREMENT για άχρηστους πίνακες
 --
+
+--
+-- AUTO_INCREMENT για πίνακα `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT για πίνακα `users`
