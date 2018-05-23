@@ -179,6 +179,7 @@ if(validate_email($email)){
       $_SESSION['clientip'] = $ip;
       $_SESSION['verify'] = 0;
       $_SESSION['email'] = $email;
+      clearSessionVars();
       $registerCookie = new cookieworker();
       $registerCookie->rememberLogin();
       header('Location: restricted-home.php');

@@ -62,8 +62,7 @@ private function storeToken($token){
     
         try{
 
-         $sql = "INSERT INTO autologin(user_key, token, ip)VALUES(:key, :token, :ip)";
-         $stmt = $this->db->prepare($sql);
+         $stmt = $this->db->prepare("INSERT INTO autologin(user_key, token, ip)VALUES(:key, :token, :ip)");
          $stmt->bindParam(':key',$_SESSION[$this->ukey]);
          $stmt->bindParam(':token',$token);
          $stmt->bindParam(':ip',$clientIp);

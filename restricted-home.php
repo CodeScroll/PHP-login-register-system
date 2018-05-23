@@ -17,6 +17,17 @@ echo 'restricted home: '.$_SESSION['email'];
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<script src = 'js/jquery-3.3.1.min.js'></script>
+<script src = 'js/bootstrap.min.js'></script>
+
+<link rel="stylesheet" href="css/menu.css">
+<link rel="stylesheet" href="css/home.css">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
 </head>
 <body>
 <?php
@@ -24,6 +35,9 @@ definers();
 uniquePage();
 include 'menu.php';
 ?>
-<a href="logout.php">Logout</a>
+
+
+<script src='js/menu.js'></script>
+<script src='js/home.js'></script>
 </body>
 </html>

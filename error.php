@@ -1,5 +1,8 @@
 <?php 
 
+require_once 'includes/authenticate.php';
+require_once 'includes/library/HTMLPurifier.auto.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="el">
